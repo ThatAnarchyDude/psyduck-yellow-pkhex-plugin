@@ -1,0 +1,1 @@
+# psyduck-yellow-pkhex-plugin
