@@ -17,11 +17,17 @@ internal static class Program
         var provider=new Provider { SAV=save };
         using var menu=new MenuStrip();
         var tools=new ToolStripMenuItem("Tools") { Name="Menu_Tools" };menu.Items.Add(tools);
-        IPlugin plugin=new Plugin();plugin.Initialize(provider,menu);
+        var pluginFolder=Path.Combine(Path.GetTempPath(),"psyduck-plugin-host-"+Guid.NewGuid());
+        Directory.CreateDirectory(pluginFolder);
+        File.Copy(typeof(Plugin).Assembly.Location,Path.Combine(pluginFolder,"PsyduckYellow.Plugin.dll"));
+        var plugins=new List<IPlugin>();
+        var loaded=PKHeX.WinForms.PluginLoader.LoadPlugins(pluginFolder,plugins,false);
+        Check(plugins.Count==1,"Official upstream loader did not discover exactly one IPlugin");
+        IPlugin plugin=plugins.Single();plugin.Initialize(provider,menu);
         Check(tools.DropDownItems.Count==1,"Tools menu entry missing");
         Check(tools.DropDownItems[0].Enabled,"HGSS entry disabled");
         Check(!plugin.TryLoadFile("unrelated-file"),"Intercepted unrelated file");
-        var creator=typeof(Plugin).GetMethod("CreateDialog",BindingFlags.NonPublic|BindingFlags.Instance)??throw new InvalidOperationException();
+        var creator=plugin.GetType().GetMethod("CreateDialog",BindingFlags.NonPublic|BindingFlags.Instance)??throw new InvalidOperationException();
         using var dialog=(Form)(creator.Invoke(plugin,[save])??throw new InvalidOperationException());
         dialog.CreateControl();
         var controls=Descendants(dialog).ToArray();
@@ -29,7 +35,7 @@ internal static class Program
         Check(party.Items.Count==2 && party.SelectedIndex==0,"Party selection missing");
         var ability=controls.OfType<Button>().Single(b=>b.Text.Contains("Anticipation"));
         Check(ability.Enabled,"Supported Hidden Ability disabled");
-        var summary=controls.OfType<TextBox>().Single();
+        var summary=controls.OfType<TextBox>().Single(t=>t.Multiline && t.ReadOnly);
         Check(summary.Text.Contains("Project shiny: True"),"Project shiny display lost");
         party.SelectedIndex=1;
         Check(!ability.Enabled,"Unsupported ability enabled");
