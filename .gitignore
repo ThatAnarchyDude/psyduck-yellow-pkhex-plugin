@@ -1,0 +1,10 @@
+.deps/
+artifacts/
+bin/
+obj/
+*.nds
+*.gbc
+*.gba
+*.dsv
+*.sav
+*.pk4

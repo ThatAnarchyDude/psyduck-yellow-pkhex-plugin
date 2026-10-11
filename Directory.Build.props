@@ -1,0 +1,4 @@
+<Project><PropertyGroup>
+<PKHeXCorePath Condition="'$(PKHeXCorePath)' == ''">$(MSBuildThisFileDirectory).deps/PKHeX/PKHeX.Core/bin/Release/net10.0/PKHeX.Core.dll</PKHeXCorePath>
+<Deterministic>true</Deterministic><Version>0.1.0</Version>
+</PropertyGroup></Project>

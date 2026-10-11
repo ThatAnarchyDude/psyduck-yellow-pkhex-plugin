@@ -1,0 +1,21 @@
+name: Build and test Windows plugin
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build pinned dependency and experimental package
+        run: python scripts/build.py
+      - name: Check Windows host interface
+        run: dotnet run --project src/WindowsHostProbe -c Release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PsyduckYellow.Plugin-experimental
+          path: artifacts/

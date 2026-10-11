@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/kwsch/PKHeX.git",
+  "commit": "66ef5983a5d349efa2dd615f2926a1b1ee97306e",
+  "version": "26.08.26",
+  "framework": "net10.0",
+  "license": "GPL-3.0-or-later (PKHeX.Core declaration)"
+}
