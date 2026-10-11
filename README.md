@@ -25,8 +25,8 @@ Pokédex access and parcel progress were retained. No player ROM or save is
 included in this repository.
 
 The Windows DLL compiles with zero warnings/errors. A Windows host test passed plugin initialization, form construction, Tools menu
-behavior, party selection, shiny display and PC gating. An additional test using
-the pinned upstream DLL loader is in progress; check Actions for its outcome. A complete manual Windows editing
+behavior, party selection, shiny display and PC gating. The pinned upstream PKHeX DLL loader also discovered and loaded the plugin
+successfully on Windows. See the verified [Windows run](https://github.com/ThatAnarchyDude/corvus-workshop/actions/runs/38168315938). A complete manual Windows editing
 session is still pending. Do not treat this as a fully validated editor.
 
 Normal PKHeX Gen IV editing can replace a custom Hidden Ability with a normal
