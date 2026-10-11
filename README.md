@@ -1,8 +1,14 @@
-# Pokémon Psyduck Yellow — PKHeX plugin
+# psyduck-yellow-pkhex-plugin
+
+Pokémon Psyduck Yellow — PKHeX plugin.
 
 Experimental compatibility work for the Pokémon Psyduck Yellow HeartGold ROM
 hack. This plugin runs inside the standard PKHeX application; a separate
 full editor is not required for the operations tested so far.
+
+[Game development log](https://github.com/ThatAnarchyDude/corvus-workshop/blob/main/psyduck-yellow/DEVELOPMENT-LOG.md) ·
+[PKHeX project fork](https://github.com/ThatAnarchyDude/PKHeX-Psyduck-Yellow) ·
+[Experimental downloads](https://github.com/ThatAnarchyDude/psyduck-yellow-pkhex-plugin/releases)
 
 ## What it does
 
